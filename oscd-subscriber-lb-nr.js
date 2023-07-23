@@ -6595,7 +6595,8 @@ class SubscriberLaterBindingNR extends s {
         ${msg('for subscribing and unsubscribing.')}
       </p>
       <mwc-formfield label="${msg('Enabled')}">
-        <mwc-switch id="enabled" ?selected=${this.enabled}>
+      <!-- TODO: Remove ?checked when open-scd uses later version of mwc-components -->
+        <mwc-switch id="enabled" ?selected=${this.enabled} ?checked=${this.enabled}>
         </mwc-switch>
       </mwc-formfield>
       <mwc-button
@@ -6603,7 +6604,9 @@ class SubscriberLaterBindingNR extends s {
         slot="primaryAction"
         icon="done"
         @click="${() => {
-            this.enabled = this.enabledUI.selected;
+            // TODO: Remove when open-scd uses later version of mwc-components.
+            this.enabled =
+                this.enabledUI.selected || this.enabledUI.checked;
             localStorage.setItem('oscd-subscriber-lb-nr', `${this.enabled}`);
             if (this.dialogUI)
                 this.dialogUI.close();
